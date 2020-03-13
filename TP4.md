@@ -48,3 +48,22 @@ En tant que root, on peut tout de meme le modifier et l'afficher. Par conséquen
 4) La commande hello n est pas reconnu par l'interpreteur
 5) Permission denied On ne peut pas lister le contenu du répertoire. Les droits du dossier s'appliquent sur son contenu
 6) 
+chmod -w nom_fichier
+chmod -w nom_dossier
+
+On ne peut pas écrire dans le fichier nouveau mais on peut le supprimer.
+Pour empecher la supression, nous devons configurer les droits du dossier 
+
+7) On ne peut plus se déplacer ni lire le contenu après avoir supprimé le droit d'exécution.
+cd ..|chmod -x test
+8) En se placant dans le répertoire, on ne peut plus rien faire, en outre on ne peut plus aller dans les sous dossiers. Les droits du repertoire parent s'applique aux repertoires enfants. La commande cd .. fonctionne car elle ne s'applique pas au repertoire dont on ne possède pas les droits
+9) chmod 740 test_fichier 
+10) umask 077
+11) umask 022
+12) umask 033
+13) chmod 534
+chmod 602
+chmod u-x,g+r,o=wx fic
+chmod 620
+14) On se place dans le dossier /etc et on effectue la commande ```ls -l|grep passwd```
+Root autorisé à écrire dedans tandis que les autres peuvent juste lire ce qui est logique puisque root gère les utilisateurs.
