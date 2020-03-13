@@ -63,7 +63,7 @@ cd ..|chmod -x test
 12) umask 033
 13) chmod 534
 chmod 602
-chmod u-x,g+r,o=wx fic
+chmod u-x,g+r,o+w fic
 chmod 620
 14) On se place dans le dossier /etc et on effectue la commande ```ls -l|grep passwd```
 Root autorisé à écrire dedans tandis que les autres peuvent juste lire ce qui est logique puisque root gère les utilisateurs.
