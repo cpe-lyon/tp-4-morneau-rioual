@@ -31,4 +31,20 @@ On peut constater que u3 a disparu des utilisateurs du groupe2 dans /etc/group
 > passwd --maxdays 90 u4
 > passwd --inactive 30 u4
 > passwd --mindays 5 u4
+17) Grace à la commande ```cat /etc/passwd |grep "root"``` on peut constater que l'interpreteur de commande est le bash situé dans /bin/bash
+18) Utilisateur qui représente l'utilisateur avec le moins de permissions
+19) On retrouve le temps de mémoire tempon du mort de passe du superutilisateur dans le manuel grace à la commande ```man sudo```. Par défaut, le time stamp est de 15 minutes.
+sudo -k permet d'effacer le mot de passe concervé en mémoire après une commande sudo
 
+II)
+
+1) >mkdir test|touch test/fichier
+>ls -l
+rwxr-xr-x dossier
+rw-r--r-- fichier
+2)chmod 000 test/fichier
+En tant que root, on peut tout de meme le modifier et l'afficher. Par conséquent, les droits ne s'appliquent pas sur root
+3)Les droits permettent d'empecher aux utilisateurs non autorisés d'accéder au contenu d'un fichier
+4) La commande hello n est pas reconnu par l'interpreteur
+5) Permission denied On ne peut pas lister le contenu du répertoire. Les droits du dossier s'appliquent sur son contenu
+6) 
