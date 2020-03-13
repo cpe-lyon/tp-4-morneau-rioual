@@ -4,17 +4,24 @@
 
 ## Exercice 1
 
-1) Pour créer deux groupes, on tape la commande suivante : >sudo addgroup groupex
-2) >sudo useradd ux -m --shell /bin/bash
-3) >sudo usermod -a -G groupex ux
-4) >cat /etc/group|grep groupe2
-   >cat /etc/gshadow|grep groupe2
-5) >sudo chgrp groupex /home/ux
-6) >sudo usermod -g groupex ux
-7) >mkdir -p {groupe1,groupe2}
- >chgrp groupe1 groupe1|chgrp groupe2 groupe2
- >chmod go+rwx groupe1|chmod go+rwx groupe2
-remarque : Il serait utile de changer les droits pour controller l'accès à ces dossiers (pour l'instant ouverts à tous).
+1) La commande permettant d'ajouter un groupe au système :
+>sudo addgroup groupe1
+2) Pour créer nos différents utilisateurs on fait appel à la commande useradd avec les option m pour que ceux ci aient leur dossier home et --shell pour indiquer le chemin de son interprétateur de commande (ici bash).
+>sudo useradd ux -m --shell /bin/bash
+3) On ajoute les utilisateurs dans leurs différents groupes (secondaires) de la manière suivante :
+>sudo usermod -a -G groupex ux
+4) On affiche les membres de groupe2 de deux facon possibles :
+   > * cat /etc/group|grep groupe2
+   >
+   > * cat /etc/gshadow|grep groupe2
+5) Pour changer le groupe propriétaire de nos fichiers ```/home/ux```, nous procédons ainsi pour chaque utilisateur:
+>sudo chgrp groupex /home/ux
+6) Pour changer le groupe primaire de nos utilisateurs, nous procédons ainsi pour chaque utilisateur:
+>sudo usermod -g groupex ux
+7) Les lignes suivantes permettent de créer deux fichiers ne pouvant etre lus et modifiés que par les membres de leur groupe respectif :
+> * mkdir -p {groupe1,groupe2}
+> * chgrp groupe1 groupe1|chgrp groupe2 groupe2
+> * chmod g+rwx groupe1|chmod go+rwx groupe2
 8) chmod 007 fichier => donne tous les droits à l'utilisateur
 9) Non car tout compte crée sans mot de passe est inactif jusqu'à l'attribution de celui ci.
 10) >passwd u1
