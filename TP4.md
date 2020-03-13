@@ -23,10 +23,12 @@ remarque : Il serait utile de changer les droits pour controller l'accès à ces
 13) >sudo cat /etc/group groupe1 possède l'id 1001
 14) On regarde dans le fichier /etc/group
 idgroup1 
-15)gpasswd -d u3 groupe2
+15) gpasswd -d u3 groupe2
 On peut constater que u3 a disparu des utilisateurs du groupe2 dans /etc/group
-16) >usermod --expiredate 2020-06-01 u4
->passwd --warndays 14 u4
->passwd --maxdays 90 u4
-
+16) 
+> usermod --expiredate 2020-06-01 u4
+> passwd --warndays 14 u4
+> passwd --maxdays 90 u4
+> passwd --inactive 30 u4
+> passwd --mindays 5 u4
 
