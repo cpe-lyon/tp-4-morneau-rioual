@@ -4,7 +4,7 @@
 
 ## Exercice 1
 
-1) Pour créer deux groupes, on tape la commande suivante : >sudo addgroup groupe1|addgroup groupe2
+1) Pour créer deux groupes, on tape la commande suivante : >sudo addgroup groupex
 2) >sudo useradd u1 -m --shell /bin/bash
 3) >sudo usermod -a -G groupex ux
 4) >bonjour
