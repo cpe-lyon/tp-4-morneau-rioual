@@ -55,31 +55,31 @@ On peut alors constater que u3 a disparu des utilisateurs du groupe2 dans /etc/g
 
 ## Exercice 2
 
-1) >mkdir test|touch test/fichier
->ls -l
-rwxr-xr-x dossier
-rw-r--r-- fichier
-2)chmod 000 test/fichier
-En tant que root, on peut tout de meme le modifier et l'afficher. Par conséquent, les droits ne s'appliquent pas sur root
-3)Les droits permettent d'pas reconnu par l'interpreteur
-5) Permission denied On ne peut pas lister le contenu du répertoire. Les droits du dossier s'appliquent sur son contenu
-6) 
-chmod -w nom_fichier
-chmod -w nom_dossier
+1) Le résultat de la commande ```ls -l``` nous donne les permissions du dossier et du fichier :
+* rwxrwxr-x : test   
+* rw-rw-r-- : fichier  
 
-On ne peut pas écrire dans le fichier nouveau mais on peut le supprimer.
-Pour empecher la supression, nous devons configurer les droits du dossier 
-
-7) On ne peut plus se déplacer ni lire le contenu après avoir supprimé le droit d'exécution.
-cd ..|chmod -x test
-8) En se placant dans le répertoire, on ne peut plus rien faire, en outre on ne peut plus aller dans les sous dossiers. Les droits du repertoire parent s'applique aux repertoires enfants. La commande cd .. fonctionne car elle ne s'applique pas au repertoire dont on ne possède pas les droits
-9) chmod 740 test_fichier 
+2)On retire tous nos droits de la manière suivante :
+>chmod 000 test/fichier
+Néanmoins en tant que root (sudo), on peut tout de meme le modifier et l'afficher. Par conséquent, les droits du chmod en écriture/lecture ne s'appliquent pas sur root.
+3)On rétablie la permission d'écriture et de lecture pour tous grâce à la commande : ```chmod 666 fichier``` ce qui nous permet en tant que propriétaire d'écriture dans le fichier. Les droits permettent donc de controler l'accès et la modification de nos fichiers par les différents utilisateurs du sysème.
+4) Que ce soit en tant que propriétaire ou en tant que superutilisateur, l'éxécution du fichier nécessite que la permission d'éxécution soit implicite dans le chmod. Auquel cas, nous obtenu comme résultat : "permission denied".
+5) En enlevant le droit de lecture sur le dossier test grâce à la commande ```chmod u-r```, il nous est impossible de lister le contenu du dossier. Le contenu du fichier nous reste néanmoins accéssible.
+6) Après avoir retiré le droit d'écriture au fichier nouveau (```chmod -w nouveau```) et au dossier courant (```chmod -w .```), il nous est impossible de pouvoir le modifier notamment avec nano qui nous précise : file unwritable. Lorsque l'on remet le droit d'écriture sur le dossier courant, il nous est toujours impossible de modifier nouveau mais il nous est possible de le suprrimer ce qui n'était pas possible précedemment. Les questions 5) et 6) nous permettent de nous rendre compte que les droits de lécture et d'écriture du dossier n'ont aucune influence sur les droits d'un fichier si ce n'est que de pouvoir les lister et les supprimer.
+7) On ne peut plus se rendre à l'intérieur du dossier ni lire son contenu ni lister ses éléments une fois le droit d'exécution supprimé (cd ..|chmod u-x test)
+8) En se placant dans le répertoire, on ne peut plus rien faire, en outre on ne peut plus aller dans les sous dossiers. Les droits du repertoire parent s'applique aux repertoires enfants. La commande cd .. fonctionne car elle ne s'applique pas au repertoire dont on ne possède pas les droits. Les droits d'un répertoire permettent de maitriser les actions qu'un utilisateur peut effectuer dans le cadre restreint de ce même répertoire.
+9) On donne le droit de lecture aux membre du groupe de la manière suivante :
+>chmod g=r test/fichier 
 10) umask 077
 11) umask 022
 12) umask 033
-13) chmod 534
-chmod 602
-chmod u-x,g+r,o+w fic
-chmod 620
+13) 
+- chmod 534 fic <=> chmod u=rx,g=wx,o=r fic
+- chmod 602 fic <=> chmod uo+w,g-rx fic \
+   *En sachant que les droits initiaux de fic sont r--r-x---*
+- chmod u-x,g+r,o+w fic <=> chmod 653 fic \ 
+   *En sachant que les droits initiaux de fic sont 711*
+- chmod 620 <=> chmod u+x,g=w,o-r fic \
+   *En sachant que les droits initiaux de fic sont r--r-x---*
 14) On se place dans le dossier /etc et on effectue la commande ```ls -l|grep passwd```
 Root autorisé à écrire dedans tandis que les autres peuvent juste lire ce qui est logique puisque root gère les utilisateurs.
