@@ -21,23 +21,32 @@
 7) Les lignes suivantes permettent de créer deux fichiers ne pouvant etre lus et modifiés que par les membres de leur groupe respectif :
 > * mkdir -p {groupe1,groupe2}
 > * chgrp groupe1 groupe1|chgrp groupe2 groupe2
-> * chmod g+rwx groupe1|chmod go+rwx groupe2
-8) chmod 007 fichier => donne tous les droits à l'utilisateur
-9) Non car tout compte crée sans mot de passe est inactif jusqu'à l'attribution de celui ci.
-10) >passwd u1
-11) >id u1    uid=1001(u1) gid=1001
-12) >sudo cat /etc/passwd u3 possède l'id 1003
-13) >sudo cat /etc/group groupe1 possède l'id 1001
-14) On regarde dans le fichier /etc/group
-idgroup1 
-15) gpasswd -d u3 groupe2
-On peut constater que u3 a disparu des utilisateurs du groupe2 dans /etc/group
-16) 
-> usermod --expiredate 2020-06-01 u4
-> passwd --warndays 14 u4
-> passwd --maxdays 90 u4
-> passwd --inactive 30 u4
-> passwd --mindays 5 u4
+> * chmod 070 groupe1|chmod 070 groupe2
+8) Pour permettre la suppression et le renomage uniquement par le propriétaire, on active le sticky bit de la maniere suivante ;
+>chmod +t fichier
+9) Si nous ne sommes pas connecté en tant que root, il nous est impossible d'effectuer la commande ```su u1``` ca aucun mot de passe n'a été défini lors de la crétion de cet utilisateur.
+10) Pour activer cet utilisateur, nous devons définir un mot de passe avec la commande suivante ```passwd u1``` ce qui nous permet ensuite de nous connecter en tant que user u1. Le début de la ligne de commande devient alors u1@serveur.
+11) Nous obtenons les informations suivantes en tapant la commande ```id u1```:
+* uid=1001(u1)
+* gid=1001(groupe1)
+Ces résultats sont cohérents avec les données receuilli dans ```/etc/passwd``` et ```/etc/group```
+12) En regardant dans le fichier /etc/passwd, on s'apercoit que u3 possède l'uid 1003.
+13)En regardant dans le fichier /etc/group, le groupe1 possède le gid 1001
+14) En effectuant la commande :
+>cat /etc/group|grep :1002: 
+On obtient le groupe2 et on évite tout risque de conflit entre guid et nom de groupe
+15) On retire l'utilisateur u3 de groupe 2 de la manière suivante :
+>gpasswd -d u3 groupe2
+On peut alors constater que u3 a disparu des utilisateurs du groupe2 dans /etc/group.
+16) Voici une série d'instruction ainsi que les fonctions qu'elles réalisent :
+| Commande  |     Fonction     |
+|----------|:-------------:|
+| usermod --expiredate 2020-06-01 u4 |  configurer une date d'expiration d'un utilisateur |
+| passwd --maxdays 90 u4 |    nécessite le changement de mot de passe sous 90 jours maximum  |
+| passwd --mindays 5 u4 | impose un délai minimum entre deux changement de mot de passe |
+| passwd --warndays 14 u4 | crée un avertissement 14 jours avant l’expiration de son mot de passe |
+| passwd --inactive 30 u4 | désactive un compte utilisateur sous un délai de 30 jours après expiration de mot de passe |
+
 17) Grace à la commande ```cat /etc/passwd |grep "root"``` on peut constater que l'interpreteur de commande est le bash situé dans /bin/bash
 18) Utilisateur qui représente l'utilisateur avec le moins de permissions
 19) On retrouve le temps de mémoire tempon du mort de passe du superutilisateur dans le manuel grace à la commande ```man sudo```. Par défaut, le time stamp est de 15 minutes.
@@ -51,8 +60,7 @@ rwxr-xr-x dossier
 rw-r--r-- fichier
 2)chmod 000 test/fichier
 En tant que root, on peut tout de meme le modifier et l'afficher. Par conséquent, les droits ne s'appliquent pas sur root
-3)Les droits permettent d'empecher aux utilisateurs non autorisés d'accéder au contenu d'un fichier
-4) La commande hello n est pas reconnu par l'interpreteur
+3)Les droits permettent d'pas reconnu par l'interpreteur
 5) Permission denied On ne peut pas lister le contenu du répertoire. Les droits du dossier s'appliquent sur son contenu
 6) 
 chmod -w nom_fichier
