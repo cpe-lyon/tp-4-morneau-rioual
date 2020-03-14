@@ -59,10 +59,10 @@ On peut alors constater que u3 a disparu des utilisateurs du groupe2 dans /etc/g
 * rwxrwxr-x : test   
 * rw-rw-r-- : fichier  
 
-2)On retire tous nos droits de la manière suivante :
+2) On retire tous nos droits de la manière suivante :
 >chmod 000 test/fichier
 Néanmoins en tant que root (sudo), on peut tout de meme le modifier et l'afficher. Par conséquent, les droits du chmod en écriture/lecture ne s'appliquent pas sur root.
-3)On rétablie la permission d'écriture et de lecture pour tous grâce à la commande : ```chmod 666 fichier``` ce qui nous permet en tant que propriétaire d'écriture dans le fichier. Les droits permettent donc de controler l'accès et la modification de nos fichiers par les différents utilisateurs du sysème.
+3) On rétablie la permission d'écriture et de lecture pour tous grâce à la commande : ```chmod 666 fichier``` ce qui nous permet en tant que propriétaire d'écriture dans le fichier. Les droits permettent donc de controler l'accès et la modification de nos fichiers par les différents utilisateurs du sysème.
 4) Que ce soit en tant que propriétaire ou en tant que superutilisateur, l'éxécution du fichier nécessite que la permission d'éxécution soit implicite dans le chmod. Auquel cas, nous obtenu comme résultat : "permission denied".
 5) En enlevant le droit de lecture sur le dossier test grâce à la commande ```chmod u-r```, il nous est impossible de lister le contenu du dossier. Le contenu du fichier nous reste néanmoins accéssible.
 6) Après avoir retiré le droit d'écriture au fichier nouveau (```chmod -w nouveau```) et au dossier courant (```chmod -w .```), il nous est impossible de pouvoir le modifier notamment avec nano qui nous précise : file unwritable. Lorsque l'on remet le droit d'écriture sur le dossier courant, il nous est toujours impossible de modifier nouveau mais il nous est possible de le suprrimer ce qui n'était pas possible précedemment. Les questions 5) et 6) nous permettent de nous rendre compte que les droits de lécture et d'écriture du dossier n'ont aucune influence sur les droits d'un fichier si ce n'est que de pouvoir les lister et les supprimer.
