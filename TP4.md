@@ -39,13 +39,13 @@ On obtient le groupe2 et on évite tout risque de conflit entre guid et nom de g
 >gpasswd -d u3 groupe2
 On peut alors constater que u3 a disparu des utilisateurs du groupe2 dans /etc/group.
 16) Voici une série d'instruction ainsi que les fonctions qu'elles réalisent :
-| Commande  |     Fonction     |
-|----------|:-------------:|
-| usermod --expiredate 2020-06-01 u4 |  configurer une date d'expiration d'un utilisateur |
-| passwd --maxdays 90 u4 |    nécessite le changement de mot de passe sous 90 jours maximum  |
-| passwd --mindays 5 u4 | impose un délai minimum entre deux changement de mot de passe |
-| passwd --warndays 14 u4 | crée un avertissement 14 jours avant l’expiration de son mot de passe |
-| passwd --inactive 30 u4 | désactive un compte utilisateur sous un délai de 30 jours après expiration de mot de passe |
+|          Commande                  |                                     Fonction                                               |
+|------------------------------------|--------------------------------------------------------------------------------------------|
+| usermod --expiredate 2020-06-01 u4 |  configurer une date d'expiration d'un utilisateur                                         |
+| passwd --maxdays 90 u4             |    nécessite le changement de mot de passe sous 90 jours maximum                           |
+| passwd --mindays 5 u4              | impose un délai minimum entre deux changement de mot de passe                              |
+| passwd --warndays 14 u4            | crée un avertissement 14 jours avant l’expiration de son mot de passe                      |
+| passwd --inactive 30 u4            | désactive un compte utilisateur sous un délai de 30 jours après expiration de mot de passe |
 
 17) Grace à la commande ```cat /etc/passwd |grep "root"``` on peut constater que l'interpreteur de commande est le bash situé dans /bin/bash
 18) Utilisateur qui représente l'utilisateur avec le moins de permissions
