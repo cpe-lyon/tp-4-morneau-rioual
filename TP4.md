@@ -60,7 +60,7 @@ On peut alors constater que u3 a disparu des utilisateurs du groupe2 dans /etc/g
 * rw-rw-r-- : fichier  
 
 2) On retire tous nos droits de la manière suivante :
->chmod 000 test/fichier
+```chmod 000 test/fichier``` 
 Néanmoins en tant que root (sudo), on peut tout de meme le modifier et l'afficher. Par conséquent, les droits du chmod en écriture/lecture ne s'appliquent pas sur root.
 3) On rétablie la permission d'écriture et de lecture pour tous grâce à la commande : ```chmod 666 fichier``` ce qui nous permet en tant que propriétaire d'écriture dans le fichier. Les droits permettent donc de controler l'accès et la modification de nos fichiers par les différents utilisateurs du sysème.
 4) Que ce soit en tant que propriétaire ou en tant que superutilisateur, l'éxécution du fichier nécessite que la permission d'éxécution soit implicite dans le chmod. Auquel cas, nous obtenu comme résultat : "permission denied".
