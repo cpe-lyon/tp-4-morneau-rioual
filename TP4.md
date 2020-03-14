@@ -39,6 +39,7 @@ On obtient le groupe2 et on évite tout risque de conflit entre guid et nom de g
 >gpasswd -d u3 groupe2
 On peut alors constater que u3 a disparu des utilisateurs du groupe2 dans /etc/group.
 16) Voici une série d'instruction ainsi que les fonctions qu'elles réalisent :
+
 |          Commande                  |                                     Fonction                                               |
 |------------------------------------|--------------------------------------------------------------------------------------------|
 | usermod --expiredate 2020-06-01 u4 |  configurer une date d'expiration d'un utilisateur                                         |
@@ -48,11 +49,11 @@ On peut alors constater que u3 a disparu des utilisateurs du groupe2 dans /etc/g
 | passwd --inactive 30 u4            | désactive un compte utilisateur sous un délai de 30 jours après expiration de mot de passe |
 
 17) Grace à la commande ```cat /etc/passwd |grep "root"``` on peut constater que l'interpreteur de commande est le bash situé dans /bin/bash
-18) Utilisateur qui représente l'utilisateur avec le moins de permissions
+18) Il s'agit de l'utilisateur qui représente l'utilisateur avec le moins de permissions
 19) On retrouve le temps de mémoire tempon du mort de passe du superutilisateur dans le manuel grace à la commande ```man sudo```. Par défaut, le time stamp est de 15 minutes.
-sudo -k permet d'effacer le mot de passe concervé en mémoire après une commande sudo
+```sudo -k``` permet d'effacer le mot de passe concervé en mémoire après une commande sudo
 
-II)
+## Exercice 2
 
 1) >mkdir test|touch test/fichier
 >ls -l
