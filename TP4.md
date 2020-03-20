@@ -24,7 +24,7 @@
 > * chmod 070 groupe1|chmod 070 groupe2
 8) Pour permettre la suppression et le renomage uniquement par le propriétaire, on active le sticky bit de la maniere suivante ;
 >chmod +t fichier
-9) Si nous ne sommes pas connecté en tant que root, il nous est impossible d'effectuer la commande ```su u1``` ca aucun mot de passe n'a été défini lors de la crétion de cet utilisateur.
+9) Si nous ne sommes pas connecté en tant que root, il nous est impossible d'effectuer la commande ```su u1``` car aucun mot de passe n'a été défini lors de la crétion de cet utilisateur, il n'est donc pas activé.
 10) Pour activer cet utilisateur, nous devons définir un mot de passe avec la commande suivante ```passwd u1``` ce qui nous permet ensuite de nous connecter en tant que user u1. Le début de la ligne de commande devient alors u1@serveur.
 11) Nous obtenons les informations suivantes en tapant la commande ```id u1```:
 * uid=1001(u1)
@@ -46,7 +46,7 @@ On peut alors constater que u3 a disparu des utilisateurs du groupe2 dans /etc/g
 | passwd --maxdays 90 u4             |    nécessite le changement de mot de passe sous 90 jours maximum                           |
 | passwd --mindays 5 u4              | impose un délai minimum entre deux changement de mot de passe                              |
 | passwd --warndays 14 u4            | crée un avertissement 14 jours avant l’expiration de son mot de passe                      |
-| passwd --inactive 30 u4            | désactive un compte utilisateur sous un délai de 30 jours après expiration de mot de passe |
+| passwd --inactive 30 u4            | désactive un compte utilisateur pour un délai de 30 jours après expiration de mot de passe |
 
 17) Grace à la commande ```cat /etc/passwd |grep "root"``` on peut constater que l'interpreteur de commande est le bash situé dans /bin/bash
 18) Il s'agit de l'utilisateur qui représente l'utilisateur avec le moins de permissions
@@ -70,9 +70,9 @@ Néanmoins en tant que root (sudo), on peut tout de meme le modifier et l'affich
 8) En se placant dans le répertoire, on ne peut plus rien faire, en outre on ne peut plus aller dans les sous dossiers. Les droits du repertoire parent s'applique aux repertoires enfants. La commande cd .. fonctionne car elle ne s'applique pas au repertoire dont on ne possède pas les droits. Les droits d'un répertoire permettent de maitriser les actions qu'un utilisateur peut effectuer dans le cadre restreint de ce même répertoire.
 9) On donne le droit de lecture aux membre du groupe de la manière suivante :
 >chmod g=r test/fichier 
-10) umask 077
-11) umask 022
-12) umask 033
+10) umask 077 ne permet que moi d'écrire, lire ou parcourir les dossiers.
+11) umask 022 autorise la lecture et parcourir pour tous.
+12) umask 037 autorise la lecture pour notre groupe.
 13) 
 - chmod 534 fic <=> chmod u=rx,g=wx,o=r fic
 - chmod 602 fic <=> chmod uo+w,g-rx fic \
